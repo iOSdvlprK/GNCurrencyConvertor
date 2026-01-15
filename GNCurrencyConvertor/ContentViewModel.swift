@@ -11,6 +11,8 @@ import Foundation
 class ContentViewModel {
     var convertedAmount = 1.0
     var baseAmount = 1.0
+    var baseCurrency: CurrencyChoice = .Usa
+    var convertedCurrency: CurrencyChoice = .Usa
     
     var numberFormatter: NumberFormatter {
         let numberFormatter = NumberFormatter()
