@@ -13,11 +13,24 @@ class ContentViewModel {
     var baseAmount = 1.0
     var baseCurrency: CurrencyChoice = .Usa
     var convertedCurrency: CurrencyChoice = .Usa
+    var rates: Rates?
     
     var numberFormatter: NumberFormatter {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .currency
         numberFormatter.currencySymbol = ""
         return numberFormatter
+    }
+    
+    func fetchRates() async {
+        guard let url = URL(string: "https://openexchangerates.org/api/latest.json?app_id=f976a852d7944994af2a0ff1ce11ffc5") else { return }
+        let urlRequest = URLRequest(url: url)
+        
+        do {
+            let (data, _) = try await URLSession.shared.data(for: urlRequest)
+            rates = try JSONDecoder().decode(Rates.self, from: data)
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 }

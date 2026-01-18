@@ -100,6 +100,9 @@ struct ContentView: View {
             }
         }
         .padding(.horizontal)
+        .task {
+            await viewModel.fetchRates()
+        }
     }
 }
 
