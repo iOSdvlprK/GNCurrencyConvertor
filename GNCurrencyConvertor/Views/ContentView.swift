@@ -23,6 +23,9 @@ struct ContentView: View {
                 Text("Amount")
                     .font(.system(size: 15))
                 TextField("", value: $viewModel.baseAmount, formatter: viewModel.numberFormatter)
+                    .onSubmit {
+                        viewModel.convert()
+                    }
                     .font(.system(size: 18, weight: .semibold))
                     .padding()
                     .overlay {
@@ -120,6 +123,9 @@ struct ContentView: View {
                         .tint(.white)
                 }
             }
+        }
+        .onTapGesture {
+            viewModel.convert()
         }
     }
 }

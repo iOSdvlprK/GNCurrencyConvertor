@@ -7,6 +7,8 @@
 
 import Foundation
 
+// conversion formula = conversion rate / base exchange rate * base amount
+
 @Observable
 class ContentViewModel {
     var convertedAmount = 1.0
@@ -40,5 +42,12 @@ class ContentViewModel {
             print(error.localizedDescription)
         }
         isLoading = false
+    }
+    
+    func convert() {
+        if let rates, let baseExchangeRate = rates.rates[baseCurrency.rawValue],
+           let convertedExchangeRate = rates.rates[convertedCurrency.rawValue] {
+            convertedAmount = (convertedExchangeRate / baseExchangeRate) * baseAmount
+        }
     }
 }
