@@ -26,6 +26,14 @@ class ContentViewModel {
         return numberFormatter
     }
     
+    var conversionRate: Double {
+        if let rates, let baseExchangeRate = rates.rates[baseCurrency.rawValue],
+           let convertedExchangeRate = rates.rates[convertedCurrency.rawValue] {
+            return convertedExchangeRate / baseExchangeRate
+        }
+        return 1
+    }
+    
     func fetchRates() async {
         guard let url = URL(string: "https://openexchangerates.org/api/latest.json?app_id=f976a852d7944994af2a0ff1ce11ffc5") else {
             errorMessage = "Could not fetch rates."
