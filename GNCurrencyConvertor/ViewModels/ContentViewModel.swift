@@ -9,6 +9,7 @@ import Foundation
 
 // conversion formula = conversion rate / base exchange rate * base amount
 
+@MainActor
 @Observable
 class ContentViewModel {
     var convertedAmount = 1.0
